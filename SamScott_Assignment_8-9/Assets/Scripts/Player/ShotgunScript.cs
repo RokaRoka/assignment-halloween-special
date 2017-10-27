@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CrossbowScript : MonoBehaviour {
-	
-	enum WeaponMode {
+public class ShotgunScript : MonoBehaviour {
+
+	enum WeaponMode
+	{
 		Ready, CoolDown, Reload
 	}
 
@@ -29,25 +30,29 @@ public class CrossbowScript : MonoBehaviour {
 	public float range = 50f;
 
 	// Use this for initialization
-	void Start () {
+	void Start()
+	{
 		_player = transform.parent.gameObject;
 		_mainCamera = Camera.main;
-		_ammoUI = GameObject.FindGameObjectWithTag ("CrossbowAmmo");
+		_ammoUI = GameObject.FindGameObjectWithTag("ShotgunAmmo");
 		_ammoUIScript = _ammoUI.GetComponent<AmmoScript>();
 		ammoCount = _ammoUIScript.AmmoReload();
 	}
-	
+
 	// Update is called once per frame
-	private void Update () {
+	private void Update()
+	{
 		FollowCursor();
 		CheckInput();
 	}
 
-	private void FixedUpdate() {
-		if (shootBuffer) FireCrossbow ();
+	private void FixedUpdate()
+	{
+		if (shootBuffer) FireShotgun();
 	}
 
-	private void FollowCursor() {
+	private void FollowCursor()
+	{
 		//get mouse position and convert to world
 		Vector3 currentMousePosition = Input.mousePosition;
 		currentMousePosition.z = _mainCamera.farClipPlane;
@@ -59,8 +64,10 @@ public class CrossbowScript : MonoBehaviour {
 
 	}
 
-	private void CheckInput() {
-		if (weaponStatus == WeaponMode.Ready) {
+	private void CheckInput()
+	{
+		if (weaponStatus == WeaponMode.Ready)
+		{
 			//check for click
 			if (Input.GetMouseButtonDown(0))
 			{
@@ -82,27 +89,27 @@ public class CrossbowScript : MonoBehaviour {
 		}
 	}
 
-	private void FireCrossbow() {
+	private void FireShotgun()
+	{
 		//if ammo, fire the ray
-		if (ammoCount > 0) {
-			//cast ray
-			RaycastHit hit;
-			if (Physics.Raycast(transform.position, transform.forward, out hit, range, 0))
-			{
-				if (hit.transform.CompareTag("Enemy")) ; //hurt enemy or some shit
-			}
+		if (ammoCount > 0)
+		{
+			//instantiate bullets
+			
 			//no matter what, draw ray and lose ammo
 			Debug.DrawRay(transform.position, transform.forward * range, Color.yellow, 1f, true);
 			ammoCount = _ammoUIScript.AmmoFired();
 		}
-		else {
+		else
+		{
 			//otherwise play clicking sound
 		}
 
 		shootBuffer = false;
 	}
 
-	private void OnDrawGizmos() {
+	private void OnDrawGizmos()
+	{
 		//draw ray for debugging
 		if (Application.isPlaying) Gizmos.DrawRay(transform.position, transform.forward);
 	}
