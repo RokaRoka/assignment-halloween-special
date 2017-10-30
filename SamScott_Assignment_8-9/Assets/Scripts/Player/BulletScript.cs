@@ -7,7 +7,7 @@ using UnityEngine;
 public class BulletScript : MonoBehaviour {
 
 	//speed
-	private float speed = 300f;
+	private float speed = 200f;
 	
 	//Distance counter
 	private Vector3 origin;

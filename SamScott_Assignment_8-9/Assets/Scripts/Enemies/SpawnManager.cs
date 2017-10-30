@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class SpawnManager : MonoBehaviour {
 
+	//EnemyGameObjects
+	//Pumpkin
+	//ZombieBirdmanSpawner
+	//Witch
+	
 	// Use this for initialization
 	void Start () {
 		
