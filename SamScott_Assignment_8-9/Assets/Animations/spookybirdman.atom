@@ -1,0 +1,12 @@
+atomVersion 1.0;
+mayaVersion 2017;
+timeUnit film;
+linearUnit cm;
+angularUnit deg;
+startTime 0;
+endTime 1;
+dagNode {
+  Birdman 1 2;
+  static v visibility 0;
+  { 1 }
+}
