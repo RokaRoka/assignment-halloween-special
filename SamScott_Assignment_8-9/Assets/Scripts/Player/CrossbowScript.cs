@@ -89,7 +89,7 @@ public class CrossbowScript : MonoBehaviour {
 			RaycastHit hit;
 			if (Physics.Raycast(transform.position, transform.forward, out hit, range, 0))
 			{
-				if (hit.transform.CompareTag("Enemy")) ; //hurt enemy or some shit
+				//if (hit.transform.CompareTag("Enemy")) ; //hurt enemy or some shit
 			}
 			//no matter what, draw ray and lose ammo
 			Debug.DrawRay(transform.position, transform.forward * range, Color.yellow, 1f, true);
