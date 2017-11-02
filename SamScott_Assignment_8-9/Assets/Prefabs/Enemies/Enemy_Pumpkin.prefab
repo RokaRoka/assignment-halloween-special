@@ -40,6 +40,7 @@ GameObject:
   - component: {fileID: 33781465125527576}
   - component: {fileID: 23827064197476266}
   - component: {fileID: 136972536173967710}
+  - component: {fileID: 114636280284356772}
   m_Layer: 0
   m_Name: Enemy_Pumpkin
   m_TagString: Untagged
@@ -113,6 +114,17 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1770964071190906}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &114636280284356772
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1770964071190906}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04cc8ed5a720ae64abd8f79776fc377d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!135 &135634839075904514
 SphereCollider:
   m_ObjectHideFlags: 1
