@@ -25,7 +25,7 @@ public class PumpkinScript : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		origin = transform.position;
-		destination = GameObject.FindGameObjectWithTag("Player").transform.position;
+		destination = GameObject.FindGameObjectWithTag("Player").transform.position - transform.forward;
 	}
 	
 	// Update is called once per frame

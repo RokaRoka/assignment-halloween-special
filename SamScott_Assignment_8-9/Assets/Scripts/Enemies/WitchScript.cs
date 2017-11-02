@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class WitchScript : MonoBehaviour
 {
+	private GameObject _spawnManage;
 
 	private Vector3 origin;
 
@@ -20,7 +21,9 @@ public class WitchScript : MonoBehaviour
 	
 	private float swaySpeed_Y = 2.0f;
 	private float swayRange_Y = 0.5f;
-	
+
+	private float spawnFreq = 1.0f;
+	private float spawnFreqMax = 10.0f;
 	// Use this for initialization
 	void Start ()
 	{
@@ -38,12 +41,12 @@ public class WitchScript : MonoBehaviour
 	{
 		t += Time.deltaTime * travelSpeed;
 
-		if (t >= distance * 2.0f) t -= distance * 2.0f;
+		if (t >= distance * 2.0f) t = 0;
 			
 		if (t >= distance)
 		{
 			//move towards origin
-			transform.position = Vector3.Lerp(destination, origin, t/(distance*2.0f));
+			transform.position = Vector3.Lerp(destination, origin, (t-distance)/distance);
 		}
 		else
 		{
@@ -57,5 +60,9 @@ public class WitchScript : MonoBehaviour
 		//transform
 		//update x pos
 	
+	}
+
+	private void CreatePumpkin() {
+		_spawnManage.SendMessage ("SpawnPumpkinSpell", transform.position);
 	}
 }
