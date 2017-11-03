@@ -33,11 +33,11 @@ public class BulletScript : MonoBehaviour {
 		}
 	}
 
-	private void OnCollisionEnter(Collision other)
+	private void OnTriggerEnter(Collider other)
 	{
 		if (other.gameObject.CompareTag("Enemy"))
 		{
-			other.gameObject.SendMessage("TakeDamage", damage);	
+			other.gameObject.GetComponent<EnemyHealth>().TakeDamage(damage);	
 		}
 		Destroy(gameObject);
 	}

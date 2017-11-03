@@ -166,7 +166,6 @@ public class ShotgunScript : MonoBehaviour {
 			weaponStatus = WeaponMode.Ready;
 			currentWait = 0;
 		}
-		Debug.Log("On cd!");
 	}
 
 	private void OnDrawGizmos()

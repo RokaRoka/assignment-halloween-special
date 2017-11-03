@@ -29,7 +29,7 @@ public class CrossbowScript : MonoBehaviour {
 	private WeaponMode weaponStatus = WeaponMode.Ready;
 
 	//waepon damage
-	private float damage = 2f;
+	private int damage = 2;
 	
 	//weapon range
 	public float range = 50f;
@@ -113,7 +113,7 @@ public class CrossbowScript : MonoBehaviour {
 			RaycastHit hit;
 			if (Physics.Raycast(transform.position, transform.forward, out hit, range, 0))
 			{
-				if (hit.transform.CompareTag("Enemy")) hit.transform.SendMessage("TakeDamage", damage);
+				if (hit.transform.CompareTag("Enemy")) hit.transform.gameObject.GetComponent<EnemyHealth>().TakeDamage(damage);
 			}
 			//no matter what, draw ray and lose ammo
 			Debug.DrawRay(transform.position, transform.forward * range, Color.yellow, 1f, true);

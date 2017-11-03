@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public enum GameMode {
 	Game, Pause
@@ -17,11 +18,14 @@ public class GameManager : MonoBehaviour {
 	public PlayerWeapon currentWeapon;
 	
 	//player weapons
-
 	public GameObject _crossbow;
 	public GameObject _crossbowAmmoUI;
 	public GameObject _shotgun;
 	public GameObject _shotgunAmmoUI;
+	
+	//player score
+	public GameObject _scoreUI;
+	private int playerScore = 0;
 	
 	private void Awake() {
 		/*/switch mode to game mode
@@ -68,5 +72,16 @@ public class GameManager : MonoBehaviour {
 			_shotgun.SetActive(false);
 			_shotgunAmmoUI.SetActive(false);
 		}
+	}
+
+	private void UpdateScoreUI()
+	{
+		_scoreUI.GetComponent<Text>().text = "Score: "+playerScore;
+	}
+	
+	public void IncreaseScore(int value)
+	{
+		playerScore += value;
+		UpdateScoreUI();
 	}
 }

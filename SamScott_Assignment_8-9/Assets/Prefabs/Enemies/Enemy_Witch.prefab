@@ -137,6 +137,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _gutsExplosion: {fileID: 0}
   maxHealth: 5
+  scoreValue: 1200
 --- !u!136 &136850416152869768
 CapsuleCollider:
   m_ObjectHideFlags: 1
