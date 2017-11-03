@@ -41,9 +41,10 @@ GameObject:
   - component: {fileID: 23827064197476266}
   - component: {fileID: 136972536173967710}
   - component: {fileID: 114636280284356772}
+  - component: {fileID: 114607621056773328}
   m_Layer: 0
   m_Name: Enemy_Pumpkin
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -114,6 +115,19 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1770964071190906}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &114607621056773328
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1770964071190906}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f21430eab0eeda4fb9a245d449e4a9c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _gutsExplosion: {fileID: 0}
+  maxHealth: 2
 --- !u!114 &114636280284356772
 MonoBehaviour:
   m_ObjectHideFlags: 1

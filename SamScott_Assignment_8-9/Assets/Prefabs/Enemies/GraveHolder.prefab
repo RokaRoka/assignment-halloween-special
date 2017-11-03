@@ -39,8 +39,8 @@ GameObject:
   - component: {fileID: 4556571999523430}
   m_Layer: 0
   m_Name: GraveHolder
-  m_TagString: Untagged
-  m_Icon: {fileID: 419385456094870383, guid: 0000000000000000d000000000000000, type: 0}
+  m_TagString: Stone
+  m_Icon: {fileID: -1412012063857583412, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -50,21 +50,21 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1228957168323022}
-  m_LocalRotation: {x: -0.018151183, y: -0.17269698, z: 0.10294043, w: 0.97941285}
+  m_LocalRotation: {x: -0.0022814705, y: 0.08712592, z: -0.026077313, w: 0.99585336}
   m_LocalPosition: {x: 0, y: 0, z: -1}
   m_LocalScale: {x: 1, y: 1.5, z: 0.4}
   m_Children: []
   m_Father: {fileID: 4556571999523430}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: -20, z: 12}
+  m_LocalEulerAnglesHint: {x: 0, y: 10, z: -3}
 --- !u!4 &4556571999523430
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1282226941067512}
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 95, y: 0.5, z: 110}
+  m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
+  m_LocalPosition: {x: 105, y: 0.5, z: 108.17}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4410768075173542}

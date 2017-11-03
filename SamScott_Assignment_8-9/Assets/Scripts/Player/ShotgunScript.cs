@@ -1,7 +1,9 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography.X509Certificates;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class ShotgunScript : MonoBehaviour {
 
@@ -10,6 +12,9 @@ public class ShotgunScript : MonoBehaviour {
 		Ready, CoolDown, Reload
 	}
 
+	//ref to game manager
+	private GameObject _gameManage; 
+	
 	//reference to player
 	private GameObject _player;
 
@@ -30,11 +35,17 @@ public class ShotgunScript : MonoBehaviour {
 	//weapons current mode
 	private WeaponMode weaponStatus = WeaponMode.Ready;
 
+	//model offset
+	private Vector3 modelOffset = new Vector3(0, 0.2f, 1f);
+	
 	//weapon range
 	public float range = 50f;
 	
 	//spread radius
-	public float spreadRadius = 0.25f;
+	public float spreadRadius = 0.2f;
+
+	public int spreadAmount = 5;
+	
 	//weapon cooldown
 	private float currentWait = 0;
 	public float shot_cooldown = 0.5f;
@@ -43,6 +54,7 @@ public class ShotgunScript : MonoBehaviour {
 	// Use this for initialization
 	void Start()
 	{
+		_gameManage = GameObject.FindGameObjectWithTag("GameController");
 		_player = transform.parent.gameObject;
 		_mainCamera = Camera.main;
 		_ammoUI = GameObject.FindGameObjectWithTag("ShotgunAmmo");
@@ -83,6 +95,7 @@ public class ShotgunScript : MonoBehaviour {
 
 		//adjust weapon rotation
 		transform.LookAt(currentMousePosition, Vector3.up);
+		transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y, 0);
 
 	}
 	
@@ -104,9 +117,10 @@ public class ShotgunScript : MonoBehaviour {
 				ammoCount = _ammoUIScript.AmmoReload();
 			}
 			//check for weapon to switch
-			else if (Input.GetKeyDown(KeyCode.Alpha2))
+			else if (Input.GetKeyDown(KeyCode.Space))
 			{
 				//switch weapon
+				_gameManage.SendMessage("SwitchWeapon");
 			}
 		}
 	}
@@ -119,7 +133,7 @@ public class ShotgunScript : MonoBehaviour {
 			Vector3 randomRot;
 			Quaternion bulletRot;
 			//instantiate bullets
-			for (int i = 0; i < 4; i++)
+			for (int i = 0; i < spreadAmount; i++)
 			{
 				randomRot = transform.forward;
 				randomRot.x += Random.Range(0f, spreadRadius * 2f) - spreadRadius;
@@ -127,12 +141,12 @@ public class ShotgunScript : MonoBehaviour {
 				
 				//make a look rotation
 				bulletRot = Quaternion.LookRotation(randomRot);
-				Instantiate(_bullet, transform.position + transform.forward, bulletRot, transform);
-				Debug.DrawRay(transform.position + (transform.forward/2f), randomRot * range, Color.blue, 1f, true);
+				Instantiate(_bullet, transform.position + (transform.forward/2f), bulletRot, transform);
+				Debug.DrawRay(transform.position + modelOffset, randomRot * range, Color.blue, 1f, true);
 			}
 			
 			//no matter what, draw ray and lose ammo
-			Debug.DrawRay(transform.position + (transform.forward/2f), transform.forward * range, Color.yellow, 1f, true);
+			Debug.DrawRay(transform.position + modelOffset, transform.forward * range, Color.yellow, 1f, true);
 			ammoCount = _ammoUIScript.AmmoFired();
 		}
 		else

@@ -7,7 +7,10 @@ using UnityEngine;
 public class BulletScript : MonoBehaviour {
 
 	//speed
-	private float speed = 200f;
+	private float speed = 300f;
+	
+	//damage
+	private int damage = 1;
 	
 	//Distance counter
 	private Vector3 origin;
@@ -24,8 +27,6 @@ public class BulletScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
 	{
-		Debug.Log(origin);
-		Debug.Log(endStep);
 		if (transform.position.magnitude >= endStep.magnitude)
 		{
 			Destroy(gameObject);
@@ -34,8 +35,10 @@ public class BulletScript : MonoBehaviour {
 
 	private void OnCollisionEnter(Collision other)
 	{
-		//play sound and vfx
-		
+		if (other.gameObject.CompareTag("Enemy"))
+		{
+			other.gameObject.SendMessage("TakeDamage", damage);	
+		}
 		Destroy(gameObject);
 	}
 }

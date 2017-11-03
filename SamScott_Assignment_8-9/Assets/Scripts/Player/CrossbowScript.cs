@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class CrossbowScript : MonoBehaviour {
@@ -7,7 +8,9 @@ public class CrossbowScript : MonoBehaviour {
 	enum WeaponMode {
 		Ready, CoolDown, Reload
 	}
-
+	//ref to game manager
+	private GameObject _gameManage; 
+	
 	//reference to player
 	private GameObject _player;
 
@@ -25,11 +28,20 @@ public class CrossbowScript : MonoBehaviour {
 	//weapons current mode
 	private WeaponMode weaponStatus = WeaponMode.Ready;
 
+	//waepon damage
+	private float damage = 2f;
+	
 	//weapon range
 	public float range = 50f;
+	
+	//weapon cooldown
+	private float currentWait = 0;
+	public float shot_cooldown = 0.25f;
+	public float reload_cooldown = 4f;
 
 	// Use this for initialization
 	void Start () {
+		_gameManage = GameObject.FindGameObjectWithTag("GameController");
 		_player = transform.parent.gameObject;
 		_mainCamera = Camera.main;
 		_ammoUI = GameObject.FindGameObjectWithTag ("CrossbowAmmo");
@@ -40,7 +52,18 @@ public class CrossbowScript : MonoBehaviour {
 	// Update is called once per frame
 	private void Update () {
 		FollowCursor();
-		CheckInput();
+		if (weaponStatus == WeaponMode.Ready)
+		{
+			CheckInput();
+		}
+		else if (weaponStatus == WeaponMode.CoolDown)
+		{
+			OnCooldown(shot_cooldown);
+		} 
+		else if (weaponStatus == WeaponMode.Reload)
+		{
+			OnCooldown(reload_cooldown);
+		}
 	}
 
 	private void FixedUpdate() {
@@ -75,9 +98,10 @@ public class CrossbowScript : MonoBehaviour {
 				ammoCount = _ammoUIScript.AmmoReload();
 			}
 			//check for weapon to switch
-			else if (Input.GetKeyDown(KeyCode.Alpha2))
+			else if (Input.GetKeyDown(KeyCode.Space))
 			{
 				//switch weapon
+				_gameManage.SendMessage("SwitchWeapon");
 			}
 		}
 	}
@@ -89,7 +113,7 @@ public class CrossbowScript : MonoBehaviour {
 			RaycastHit hit;
 			if (Physics.Raycast(transform.position, transform.forward, out hit, range, 0))
 			{
-				//if (hit.transform.CompareTag("Enemy")) ; //hurt enemy or some shit
+				if (hit.transform.CompareTag("Enemy")) hit.transform.SendMessage("TakeDamage", damage);
 			}
 			//no matter what, draw ray and lose ammo
 			Debug.DrawRay(transform.position, transform.forward * range, Color.yellow, 1f, true);
@@ -100,6 +124,16 @@ public class CrossbowScript : MonoBehaviour {
 		}
 
 		shootBuffer = false;
+	}
+	
+	private void OnCooldown(float cooldownTime)
+	{
+		currentWait += Time.deltaTime;
+		if (currentWait >= cooldownTime)
+		{
+			weaponStatus = WeaponMode.Ready;
+			currentWait = 0;
+		}
 	}
 
 	private void OnDrawGizmos() {

@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class WitchScript : MonoBehaviour
 {
+
+	//witch guts explosion
 	
 	private GameObject newSpell;
 	public GameObject _spell;
@@ -33,6 +35,8 @@ public class WitchScript : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
+		transform.rotation = Quaternion.LookRotation(Vector3.right);
+		
 		origin = transform.position;
 		destination = origin + (transform.forward * distance);
 	}

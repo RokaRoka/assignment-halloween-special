@@ -21,9 +21,10 @@ GameObject:
   - component: {fileID: 4043817884115650}
   - component: {fileID: 136850416152869768}
   - component: {fileID: 114346420899019582}
+  - component: {fileID: 114912553390302744}
   m_Layer: 0
   m_Name: Enemy_Witch
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -123,6 +124,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _spell: {fileID: 1195196808299292, guid: 78697e0116413734da846745a08a1805, type: 2}
+--- !u!114 &114912553390302744
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1104714545994456}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f21430eab0eeda4fb9a245d449e4a9c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _gutsExplosion: {fileID: 0}
+  maxHealth: 5
 --- !u!136 &136850416152869768
 CapsuleCollider:
   m_ObjectHideFlags: 1

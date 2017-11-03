@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class PumpkinScript : MonoBehaviour {
 
+	//pumpkin guts explosion
+	
+	
 	//original postion
 	private Vector3 origin;
 
@@ -13,7 +16,7 @@ public class PumpkinScript : MonoBehaviour {
 	private Vector3 risePosition;
 	//destination position (i.e. player)
 	private Vector3 destination;
-
+	
 	//step value
 	private float t = 0f;
 
