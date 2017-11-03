@@ -101,7 +101,7 @@ public class CrossbowScript : MonoBehaviour {
 			else if (Input.GetKeyDown(KeyCode.Space))
 			{
 				//switch weapon
-				_gameManage.SendMessage("SwitchWeapon");
+				_gameManage.GetComponent<GameManager>().SwitchWeapon();
 			}
 		}
 	}

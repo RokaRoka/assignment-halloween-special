@@ -36,7 +36,7 @@ public class ShotgunScript : MonoBehaviour {
 	private WeaponMode weaponStatus = WeaponMode.Ready;
 
 	//model offset
-	private Vector3 modelOffset = new Vector3(0, 0.2f, 1f);
+	private GameObject muzzleObject;
 	
 	//weapon range
 	public float range = 50f;
@@ -60,6 +60,7 @@ public class ShotgunScript : MonoBehaviour {
 		_ammoUI = GameObject.FindGameObjectWithTag("ShotgunAmmo");
 		_ammoUIScript = _ammoUI.GetComponent<AmmoScript>();
 		ammoCount = _ammoUIScript.AmmoReload();
+		muzzleObject = transform.GetChild (0).gameObject;
 	}
 
 	// Update is called once per frame
@@ -120,7 +121,7 @@ public class ShotgunScript : MonoBehaviour {
 			else if (Input.GetKeyDown(KeyCode.Space))
 			{
 				//switch weapon
-				_gameManage.SendMessage("SwitchWeapon");
+				_gameManage.GetComponent<GameManager>().SwitchWeapon();
 			}
 		}
 	}
@@ -130,23 +131,25 @@ public class ShotgunScript : MonoBehaviour {
 		//if ammo, fire the ray
 		if (ammoCount > 0)
 		{
+			Vector3 muzzlePosition = muzzleObject.transform.position;
 			Vector3 randomRot;
 			Quaternion bulletRot;
+
 			//instantiate bullets
 			for (int i = 0; i < spreadAmount; i++)
 			{
 				randomRot = transform.forward;
 				randomRot.x += Random.Range(0f, spreadRadius * 2f) - spreadRadius;
 				randomRot.y += Random.Range(0f, spreadRadius * 2f) - spreadRadius;
-				
+
 				//make a look rotation
 				bulletRot = Quaternion.LookRotation(randomRot);
-				Instantiate(_bullet, transform.position + (transform.forward/2f), bulletRot, transform);
-				Debug.DrawRay(transform.position + modelOffset, randomRot * range, Color.blue, 1f, true);
+				Instantiate(_bullet, muzzlePosition, bulletRot, transform);
+				Debug.DrawRay(muzzlePosition, randomRot * range, Color.blue, 1f, true);
 			}
 			
 			//no matter what, draw ray and lose ammo
-			Debug.DrawRay(transform.position + modelOffset, transform.forward * range, Color.yellow, 1f, true);
+			Debug.DrawRay(muzzlePosition, transform.forward * range, Color.yellow, 1f, true);
 			ammoCount = _ammoUIScript.AmmoFired();
 		}
 		else
