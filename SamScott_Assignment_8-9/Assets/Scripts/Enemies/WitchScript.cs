@@ -6,8 +6,10 @@ using UnityEngine;
 
 public class WitchScript : MonoBehaviour
 {
-	private GameObject _spawnManage;
-
+	
+	private GameObject newSpell;
+	public GameObject _spell;
+	
 	private Vector3 origin;
 
 	private Vector3 destination;
@@ -22,8 +24,12 @@ public class WitchScript : MonoBehaviour
 	private float swaySpeed_Y = 2.0f;
 	private float swayRange_Y = 0.5f;
 
+	//spawn variables
 	private float spawnFreq = 1.0f;
 	private float spawnFreqMax = 10.0f;
+	
+	private int spawnCount = 0;
+	
 	// Use this for initialization
 	void Start ()
 	{
@@ -35,14 +41,20 @@ public class WitchScript : MonoBehaviour
 	void Update ()
 	{
 		UpdatePosition();
+		UpdateTick();
 	}
 
 	private void UpdatePosition()
 	{
 		t += Time.deltaTime * travelSpeed;
-
-		if (t >= distance * 2.0f) t = 0;
-			
+		
+		//if done with a loop, reset vars
+		if (t >= distance * 2.0f)
+		{
+			t = 0;
+			spawnCount = 0;
+		}
+		
 		if (t >= distance)
 		{
 			//move towards origin
@@ -62,7 +74,20 @@ public class WitchScript : MonoBehaviour
 	
 	}
 
-	private void CreatePumpkin() {
-		_spawnManage.SendMessage ("SpawnPumpkinSpell", transform.position);
+	private void UpdateTick()
+	{
+		if (Mathf.FloorToInt(t / distance * spawnFreq) >= spawnCount)
+		{
+			spawnCount++;
+			CreateSpell();
+		}
 	}
+
+	private void CreateSpell()
+	{
+		Debug.Log("Spell cast!");
+		newSpell = Instantiate(_spell, transform.position, Quaternion.identity);
+	}
+	
+	
 }

@@ -25,14 +25,16 @@ public class PumpkinScript : MonoBehaviour {
 	//gameplay values
 	private float travelSpeed = 1.0f;
 	
-	private float swaySpeed_X = 1.0f;
-
-	private float swaySpeed_Y = 5.0f;
+	private float swaySpeed_X = 2f;
+	private float swayRange_X = 0.25f;
+	
+	private float swaySpeed_Y = 3.0f;
+	private float swayRange_Y = 1.5f;
 	
 	// Use this for initialization
 	void Start () {
 		origin = transform.position;
-		risePosition = transform.position + Vector3.up * 3f;
+		risePosition = transform.position + Vector3.up * 2f;
 
 	}
 	
@@ -47,7 +49,7 @@ public class PumpkinScript : MonoBehaviour {
 		if (t >= riseTime) {
 			rising = false;
 			origin = transform.position;
-			destination = GameObject.FindGameObjectWithTag("Player").transform.position - transform.forward;
+			destination = GameObject.FindGameObjectWithTag("Player").transform.position - transform.forward * 2f;
 			t = 0;
 		} else {
 			//move towards player
@@ -64,10 +66,8 @@ public class PumpkinScript : MonoBehaviour {
 		else {
 			//move towards player
 			transform.position = Vector3.Lerp(origin, destination, t/journeyTime);
-			//update y pos
-			transform.Translate(Vector3.up * Mathf.Sin(t*swaySpeed_Y));
-			//transform
-			//update x pos
+			//update x and y pos
+			transform.Translate((Vector3.up * Mathf.Sin(t*swaySpeed_Y)) * swayRange_Y + Vector3.right * Mathf.Sin(t*swaySpeed_X) * swayRange_X);
 		}
 	}
 }
