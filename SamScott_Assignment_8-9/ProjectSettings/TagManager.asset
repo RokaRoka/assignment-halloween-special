@@ -7,6 +7,11 @@ TagManager:
   - ShotgunAmmo
   - CrossbowAmmo
   - Bullet
+  - Terrain
+  - SpawnController
+  - Enemy
+  - Stone
+  - SweetSpot
   layers:
   - Default
   - TransparentFX
