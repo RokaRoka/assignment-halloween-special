@@ -13,6 +13,7 @@ public class SpawnManager : MonoBehaviour {
 	
 	//SpawnPoint Gameobject list
 	public GameObject _masterGrave;
+	private GameObject[] _graveEyes = new GameObject[2];
 	public GameObject _graveHolderMaster;
 	public GameObject[] _allGraves;
 	
@@ -51,7 +52,8 @@ public class SpawnManager : MonoBehaviour {
 	private void Start () {
 		for (int i = 0; i < _allGraves.Length; i++) {
 			_allGraves[i] = _graveHolderMaster.transform.GetChild(i).gameObject;
-		}	
+		}
+		_graveEyes = GameObject.FindGameObjectsWithTag("Statue");
 	}
 	
 	// Update is called once per frame
@@ -112,10 +114,7 @@ public class SpawnManager : MonoBehaviour {
 			//SPAWN BIRDMAN
 			Debug.Log("wavetick is "+waveTick);
 			currentBirdman = EnemySpawn(_birdman, _masterGrave.transform.position);
-			//start music
-			if (!_audioManage.GetComponent<AudioSource>().isPlaying) _audioManage.GetComponent<AudioSource>().Play();
-			//pause ticking until all enemies are defeated
-			t_stopped = true;
+			BirdmanSpawns();
 		}
 	}
 
@@ -138,6 +137,10 @@ public class SpawnManager : MonoBehaviour {
 		t = 0;
 		waveTick = 0;
 		t_stopped = false;
+
+		for (int i = 0; i < 2; i++) {
+			_graveEyes[i].GetComponent<LensFlare>().enabled = true;
+		}
 		
 		//make game LONGER and HARDER
 		waveLength += waveNum * waveDifficultyIncrement;
@@ -145,6 +148,7 @@ public class SpawnManager : MonoBehaviour {
 
 	public void CheckWaveComplete()
 	{
+		//work oon this
 		if (t_stopped && currentBirdman == null)
 		{
 			WaveComplete();
@@ -156,5 +160,15 @@ public class SpawnManager : MonoBehaviour {
 		_waveUI.GetComponent<Text>().text = "Wave " + waveNum;
 		_waveUI.transform.GetChild(0).GetComponent<Text>().text = "Wave " + waveNum;
 	}
-	
+
+	private void BirdmanSpawns() {
+		//start music
+		if (!_audioManage.GetComponent<AudioSource>().isPlaying) _audioManage.GetComponent<AudioSource>().Play();
+		for (int i = 0; i < 2; i++) {
+			_graveEyes[i].GetComponent<LensFlare>().enabled = true;
+		}
+		//pause ticking until all enemies are defeated
+		t_stopped = true;
+	}
+
 }
