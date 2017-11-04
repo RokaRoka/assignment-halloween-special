@@ -30,7 +30,10 @@ public class GameManager : MonoBehaviour {
 	public GameObject _crossbowAmmoUI;
 	public GameObject _shotgun;
 	public GameObject _shotgunAmmoUI;
-	
+
+	//player reticle
+	public Texture2D _reticle;
+
 	//player score
 	public GameObject _scoreUI;
 	private int playerScore = 0;
@@ -61,6 +64,7 @@ public class GameManager : MonoBehaviour {
 		currentMode = newMode;
 		//if game, resume play and confine cursor
 		if (newMode == GameMode.Game) {
+			Cursor.SetCursor (_reticle, Vector2.zero, CursorMode.Auto);
 			Cursor.lockState = CursorLockMode.Confined;
 			Debug.Log("Mode is Game!");
 		}

@@ -14,6 +14,7 @@ public class EnemyHealth : MonoBehaviour {
 	
 	//game manager reference
 	private GameManager _gameManager;
+	private SpawnManager _spawnManger;
 	
 	//gameplay vars
 	public int maxHealth = 2;
@@ -26,7 +27,8 @@ public class EnemyHealth : MonoBehaviour {
 	void Start ()
 	{
 		_gameManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
-		
+		_spawnManger = GameObject.FindGameObjectWithTag ("SpawnController").GetComponent<SpawnManager>();
+
 		currentHealth = maxHealth;
 	}
 	
@@ -61,7 +63,9 @@ public class EnemyHealth : MonoBehaviour {
 		Instantiate(_deathParticles, transform.position, transform.rotation);
 		GameObject someText = Instantiate(_textPopUp, transform.position, Quaternion.identity);
 		someText.GetComponent<TextMesh>().text = scoreValue.ToString();
-		
+
+		_spawnManger.CheckWaveComplete();
+
 		//destroy
 		Destroy(gameObject);
 	}

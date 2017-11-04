@@ -113,7 +113,7 @@ public class SpawnManager : MonoBehaviour {
 			Debug.Log("wavetick is "+waveTick);
 			currentBirdman = EnemySpawn(_birdman, _masterGrave.transform.position);
 			//start music
-			_audioManage.GetComponent<AudioSource>().Play();
+			if (!_audioManage.GetComponent<AudioSource>().isPlaying) _audioManage.GetComponent<AudioSource>().Play();
 			//pause ticking until all enemies are defeated
 			t_stopped = true;
 		}
@@ -132,10 +132,11 @@ public class SpawnManager : MonoBehaviour {
 	
 	private void WaveComplete()
 	{
-		_audioManage.GetComponent<AudioSource>().Stop();
+		//_audioManage.GetComponent<AudioSource>().Stop();
 		waveNum++;
 		UpdateWaveUI();
 		t = 0;
+		waveTick = 0;
 		t_stopped = false;
 		
 		//make game LONGER and HARDER
