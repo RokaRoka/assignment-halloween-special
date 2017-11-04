@@ -1,67 +1,10 @@
 fileFormatVersion: 2
-guid: 3d288ec8ee140944eab3bf6ad65fe959
-timeCreated: 1509647741
+guid: 7504cadb1c2e63e408a81bd4eafb6092
+timeCreated: 1509759586
 licenseType: Free
 ModelImporter:
   serializedVersion: 21
-  fileIDToRecycleName:
-    100000: //RootNode
-    100002: beak1
-    100004: beak_2
-    100006: Birdman
-    100008: head
-    100010: joint13
-    100012: joint5
-    100014: Lankle
-    100016: Lelbow
-    100018: Lhand
-    100020: Lhip
-    100022: Lknee
-    100024: Lscythe
-    100026: Lshoulder
-    100028: Ltoe
-    100030: neck
-    100032: Rankle
-    100034: Relbow
-    100036: Rhand
-    100038: Rhip
-    100040: Rknee
-    100042: root_joint
-    100044: Rscythe
-    100046: Rshoulder
-    100048: Rtoe
-    100050: spine_1
-    100052: spine_2
-    400000: //RootNode
-    400002: beak1
-    400004: beak_2
-    400006: Birdman
-    400008: head
-    400010: joint13
-    400012: joint5
-    400014: Lankle
-    400016: Lelbow
-    400018: Lhand
-    400020: Lhip
-    400022: Lknee
-    400024: Lscythe
-    400026: Lshoulder
-    400028: Ltoe
-    400030: neck
-    400032: Rankle
-    400034: Relbow
-    400036: Rhand
-    400038: Rhip
-    400040: Rknee
-    400042: root_joint
-    400044: Rscythe
-    400046: Rshoulder
-    400048: Rtoe
-    400050: spine_1
-    400052: spine_2
-    4300000: Birdman
-    9500000: //RootNode
-    13700000: Birdman
+  fileIDToRecycleName: {}
   materials:
     importMaterials: 1
     materialName: 0
@@ -78,7 +21,7 @@ ModelImporter:
     animationImportWarnings: 
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
-    animationCompression: 3
+    animationCompression: 1
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
@@ -128,7 +71,7 @@ ModelImporter:
     rootMotionBoneName: 
     rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
     hasTranslationDoF: 0
-    hasExtraRoot: 1
+    hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
   animationType: 2

@@ -7,6 +7,7 @@ public class PumpkinScript : MonoBehaviour {
 
 	//pumpkin guts explosion
 	
+	
 	//enemy state here
 	private EnemyState currentState = EnemyState.Rising;
 
@@ -31,15 +32,21 @@ public class PumpkinScript : MonoBehaviour {
 	private float travelSpeed = 1.0f;
 	
 	private float swaySpeed_X = 2f;
-	private float swayRange_X = 0.25f;
+	private float swayRange_X = 0.2f;
 	
 	private float swaySpeed_Y = 3.0f;
 	private float swayRange_Y = 1.5f;
 
 	public float baseHitStun = 1f;
 	
+	//other script
+	private EnemyHealth _enemyHealthScript;
+	
 	// Use this for initialization
-	void Start () {
+	void Start ()
+	{
+		_enemyHealthScript = GetComponent<EnemyHealth>();
+		
 		origin = transform.position;
 		risePosition = transform.position + Vector3.up * 2f;
 
@@ -68,7 +75,9 @@ public class PumpkinScript : MonoBehaviour {
 		if (t >= riseTime) {
 			rising = false;
 			origin = transform.position;
-			destination = GameObject.FindGameObjectWithTag("Player").transform.position + Vector3.forward;
+			destination = GameObject.FindGameObjectWithTag("Player").transform.position;
+			transform.rotation = Quaternion.LookRotation(destination - transform.position);
+			destination -= transform.forward * 2f;
 			currentState = EnemyState.Moving;
 			t = 0;
 		} else {
@@ -82,11 +91,12 @@ public class PumpkinScript : MonoBehaviour {
 		if (t >= journeyTime) {
 			//blow the heck up
 			//player damage
+			_enemyHealthScript.DealDamage();
 			Destroy(gameObject);
 		}
 		else {
 			//move towards player
-			transform.position = Vector3.Lerp(origin, destination, t/journeyTime);
+			transform.position = Vector3.Lerp(origin, destination, t/(journeyTime));
 			//update x and y pos
 			transform.Translate((Vector3.up * Mathf.Sin(t*swaySpeed_Y)) * swayRange_Y + Vector3.right * Mathf.Sin(t*swaySpeed_X) * swayRange_X);
 		}

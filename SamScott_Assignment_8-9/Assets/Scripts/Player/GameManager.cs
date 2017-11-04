@@ -35,6 +35,11 @@ public class GameManager : MonoBehaviour {
 	public GameObject _scoreUI;
 	private int playerScore = 0;
 	
+	//player health
+	public GameObject _healthUI;
+	private GameObject[] _heartsUI = new GameObject[3];
+	private int playerHealth = 3;
+	
 	private void Awake() {
 		/*/switch mode to game mode
 		SwitchMode(GameMode.Game);
@@ -42,6 +47,11 @@ public class GameManager : MonoBehaviour {
 	}
 
 	private void Start() {
+		for (int i = 0; i < _heartsUI.Length; i++)
+		{
+			_heartsUI[i] = _healthUI.transform.GetChild(i).gameObject;
+		}
+		
 		currentWeapon = PlayerWeapon.Crossbow;
 		//switch mode to game mode
 		SwitchMode(GameMode.Game);
@@ -91,5 +101,24 @@ public class GameManager : MonoBehaviour {
 	{
 		playerScore += value;
 		UpdateScoreUI();
+	}
+
+	public void PlayerTakeDamage()
+	{
+		playerHealth--;
+		_heartsUI[playerHealth].SetActive(false);
+		if (playerHealth == 0)
+		{
+			//run gameover
+		}
+	}
+
+	public void PlayerHealed()
+	{
+		playerHealth = 3;
+		for (int i = 0; i < _heartsUI.Length; i++)
+		{
+			_heartsUI[i].SetActive(true);
+		}
 	}
 }

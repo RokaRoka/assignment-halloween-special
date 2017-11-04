@@ -5,7 +5,12 @@ using UnityEngine;
 public class EnemyHealth : MonoBehaviour {
 
 	//damaged
-	public GameObject _gutsExplosion;
+	public GameObject _bloodSplat;
+
+	public GameObject _deathParticles;
+	
+	//score popup
+	public GameObject _textPopUp;
 	
 	//game manager reference
 	private GameManager _gameManager;
@@ -21,6 +26,7 @@ public class EnemyHealth : MonoBehaviour {
 	void Start ()
 	{
 		_gameManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
+		
 		currentHealth = maxHealth;
 	}
 	
@@ -29,6 +35,11 @@ public class EnemyHealth : MonoBehaviour {
 		
 	}
 
+	public void DealDamage()
+	{
+		_gameManager.PlayerTakeDamage();
+	}
+	
 	public void TakeDamage(int value)
 	{
 		currentHealth -= value;
@@ -36,11 +47,21 @@ public class EnemyHealth : MonoBehaviour {
 		if (currentHealth <= 0) Death();
 	}
 
+	public void BloodSplatter(Vector3 position, Quaternion rotation)
+	{
+		//spawn explosion of bits
+		Instantiate(_bloodSplat, position, rotation, transform);
+	}
+
 	private void Death()
 	{
 		//add score
 		_gameManager.IncreaseScore(scoreValue);
 		//create explosion prefab
+		Instantiate(_deathParticles, transform.position, transform.rotation);
+		GameObject someText = Instantiate(_textPopUp, transform.position, Quaternion.identity);
+		someText.GetComponent<TextMesh>().text = scoreValue.ToString();
+		
 		//destroy
 		Destroy(gameObject);
 	}
@@ -49,7 +70,7 @@ public class EnemyHealth : MonoBehaviour {
 	{
 		if (other.gameObject.CompareTag("Bullet"))
 		{
-			//spawn explosion of bits
+			BloodSplatter(other.transform.position, Quaternion.Inverse(other.transform.rotation));
 			//change to hit animation
 			//cause hit stun
 		}

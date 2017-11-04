@@ -35,11 +35,16 @@ public class BirdmanScript : MonoBehaviour {
 
 	public float baseHitStun = 1f;
 
+	//otehr script
+	private EnemyHealth _enemyHealthScript;
+	
 	// Use this for initialization
 	void Start () {
+		_enemyHealthScript = GetComponent<EnemyHealth>();
+		
 		//get bounds
-		Bounds birdmanBounds = transform.GetChild(0).GetComponent<MeshFilter>().mesh.bounds;
-		float birdmanHeight = birdmanBounds.size.y * transform.localScale.y;
+		Bounds birdmanBounds = transform.GetChild(0).GetChild(0).GetComponent<SkinnedMeshRenderer>().bounds;
+		float birdmanHeight = birdmanBounds.size.y/2f;
 		origin = transform.position + Vector3.down * birdmanHeight;
 		risePosition = transform.position + Vector3.up * birdmanHeight;
 
@@ -51,15 +56,15 @@ public class BirdmanScript : MonoBehaviour {
 	void Update () {
 		switch (currentState) {
 		case EnemyState.Rising:
-			Debug.Log ("Start rising!");
+			//Debug.Log ("Start rising!");
 			RiseFromGrave ();
 			break;
 		case EnemyState.Moving:
-			Debug.Log ("Start moving!");
 			UpdatePosition ();
 			break;
 		case EnemyState.Attacking:
-			Debug.Log ("Attack, hiyah!");//do an attack
+			//Debug.Log ("Attack, hiyah!");//do an attack
+			UpdateAttack();
 			break;
 		default:
 			//owch! get hit.
@@ -100,12 +105,10 @@ public class BirdmanScript : MonoBehaviour {
 		t += Time.deltaTime;
 		if (t >= 10f/attackSpeed) {
 			//Attack function!
+			_enemyHealthScript.DealDamage();
 			Debug.Log("Sycthe attack!");
 			t -= attackSpeed;
 		}
 	}
-
-	private void DealDamage() {
-		//player, player health script, deal damage
-	}
+	
 }

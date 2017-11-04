@@ -21,6 +21,11 @@ public class ShotgunScript : MonoBehaviour {
 	//reference to camera
 	private Camera _mainCamera;
 
+	//audio source
+	private AudioSource shotgunSounds;
+	public AudioClip shotgunFire;
+	public AudioClip shotgunReload;
+	
 	//reference to ammoHolder
 	private GameObject _ammoUI;
 	private AmmoScript _ammoUIScript;
@@ -49,7 +54,7 @@ public class ShotgunScript : MonoBehaviour {
 	//weapon cooldown
 	private float currentWait = 0;
 	public float shot_cooldown = 0.5f;
-	public float reload_cooldown = 2f;
+	public float reload_cooldown = 3f;
 	
 	// Use this for initialization
 	void Start()
@@ -61,6 +66,8 @@ public class ShotgunScript : MonoBehaviour {
 		_ammoUIScript = _ammoUI.GetComponent<AmmoScript>();
 		ammoCount = _ammoUIScript.AmmoReload();
 		muzzleObject = transform.GetChild (0).gameObject;
+
+		shotgunSounds = GetComponent<AudioSource>();
 	}
 
 	// Update is called once per frame
@@ -115,6 +122,8 @@ public class ShotgunScript : MonoBehaviour {
 			//check for reload
 			else if (Input.GetKeyDown(KeyCode.R))
 			{
+				shotgunSounds.clip = shotgunReload;
+				shotgunSounds.Play();
 				ammoCount = _ammoUIScript.AmmoReload();
 			}
 			//check for weapon to switch
@@ -151,6 +160,9 @@ public class ShotgunScript : MonoBehaviour {
 			//no matter what, draw ray and lose ammo
 			Debug.DrawRay(muzzlePosition, transform.forward * range, Color.yellow, 1f, true);
 			ammoCount = _ammoUIScript.AmmoFired();
+			
+			shotgunSounds.clip = shotgunFire;
+			shotgunSounds.Play();
 		}
 		else
 		{

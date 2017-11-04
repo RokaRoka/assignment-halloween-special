@@ -1,7 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
+using System.Security.Cryptography.X509Certificates;
 using UnityEditor;
 using UnityEngine;
+using UnityEngineInternal;
 
 public class CrossbowScript : MonoBehaviour {
 	
@@ -17,11 +20,26 @@ public class CrossbowScript : MonoBehaviour {
 	//reference to camera
 	private Camera _mainCamera;
 
+	//audio source
+	private AudioSource crossbowSounds;
+	public AudioClip crossbowFire;
+	
+	public GameObject stickBolt;
+	
 	//reference to ammoHolder
 	private GameObject _ammoUI;
 	private AmmoScript _ammoUIScript;
 	private int ammoCount = 0;
 
+	//model offset
+	private GameObject muzzleObject;
+	
+	private LineRenderer boltLine;
+
+	//line renderer time vars
+	private float line_t = 0;
+	public float lineLifetime = 1f;
+	
 	//fire weapon buffer
 	private bool shootBuffer = false;
 
@@ -36,8 +54,8 @@ public class CrossbowScript : MonoBehaviour {
 	
 	//weapon cooldown
 	private float currentWait = 0;
-	public float shot_cooldown = 0.25f;
-	public float reload_cooldown = 4f;
+	public float shot_cooldown = 1f;
+	public float reload_cooldown = 3f;
 
 	// Use this for initialization
 	void Start () {
@@ -47,6 +65,11 @@ public class CrossbowScript : MonoBehaviour {
 		_ammoUI = GameObject.FindGameObjectWithTag ("CrossbowAmmo");
 		_ammoUIScript = _ammoUI.GetComponent<AmmoScript>();
 		ammoCount = _ammoUIScript.AmmoReload();
+
+		crossbowSounds = GetComponent<AudioSource>();
+		
+		boltLine = GetComponent<LineRenderer>();
+		muzzleObject = transform.GetChild (0).gameObject;
 	}
 	
 	// Update is called once per frame
@@ -63,6 +86,14 @@ public class CrossbowScript : MonoBehaviour {
 		else if (weaponStatus == WeaponMode.Reload)
 		{
 			OnCooldown(reload_cooldown);
+		}
+		if (line_t > 0)
+		{
+			line_t -= Time.deltaTime;
+			if (line_t <= 0)
+			{
+				boltLine.enabled = false;
+			}
 		}
 	}
 
@@ -111,12 +142,30 @@ public class CrossbowScript : MonoBehaviour {
 		if (ammoCount > 0) {
 			//cast ray
 			RaycastHit hit;
-			if (Physics.Raycast(transform.position, transform.forward, out hit, range, 0))
+			if (Physics.Raycast(muzzleObject.transform.position, muzzleObject.transform.forward, out hit, range))
 			{
-				if (hit.transform.CompareTag("Enemy")) hit.transform.gameObject.GetComponent<EnemyHealth>().TakeDamage(damage);
+				Debug.Log(hit.transform.name);
+				if (hit.transform.CompareTag("Enemy"))
+				{
+					hit.transform.GetComponent<EnemyHealth>().BloodSplatter(hit.point, Quaternion.LookRotation(hit.normal * -1));
+					hit.transform.GetComponent<EnemyHealth>().TakeDamage(damage);
+					Instantiate(stickBolt, hit.point, Quaternion.LookRotation(hit.normal * -1), hit.transform);
+					
+					Debug.Log("Hit!");
+				} else if (hit.transform.CompareTag("SweetSpot"))
+				{
+					hit.transform.parent.GetComponent<EnemyHealth>().BloodSplatter(hit.point, Quaternion.LookRotation(hit.normal * -1));
+					hit.transform.parent.GetComponent<EnemyHealth>().TakeDamage(damage * 2);
+					
+					Debug.Log("Hit SweetSpot!");
+				}
 			}
 			//no matter what, draw ray and lose ammo
-			Debug.DrawRay(transform.position, transform.forward * range, Color.yellow, 1f, true);
+			
+			Debug.DrawRay(muzzleObject.transform.position, muzzleObject.transform.forward * range, Color.yellow, 1f, true);
+			StartHitLine();
+			crossbowSounds.Play();
+			
 			ammoCount = _ammoUIScript.AmmoFired();
 		}
 		else {
@@ -124,6 +173,15 @@ public class CrossbowScript : MonoBehaviour {
 		}
 
 		shootBuffer = false;
+	}
+
+	private void StartHitLine()
+	{
+		boltLine.SetPosition(0, muzzleObject.transform.position);
+		boltLine.SetPosition(1, muzzleObject.transform.position + muzzleObject.transform.forward * range);
+		boltLine.enabled = true;
+
+		line_t = lineLifetime;
 	}
 	
 	private void OnCooldown(float cooldownTime)
@@ -135,9 +193,9 @@ public class CrossbowScript : MonoBehaviour {
 			currentWait = 0;
 		}
 	}
-
+	
 	private void OnDrawGizmos() {
 		//draw ray for debugging
-		if (Application.isPlaying) Gizmos.DrawRay(transform.position, transform.forward);
+		if (Application.isPlaying) Gizmos.DrawRay(muzzleObject.transform.position, muzzleObject.transform.forward);
 	}
 }
