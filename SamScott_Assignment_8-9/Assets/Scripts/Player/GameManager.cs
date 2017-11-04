@@ -12,6 +12,14 @@ public enum PlayerWeapon
 	Crossbow, Shotgun
 }
 
+public enum EnemyState {
+	Rising,
+	Moving,
+	Hit,
+	Attacking,
+	Thriller
+}
+
 public class GameManager : MonoBehaviour {
 
 	public GameMode currentMode;

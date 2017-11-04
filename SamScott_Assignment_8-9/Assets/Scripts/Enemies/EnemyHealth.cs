@@ -50,6 +50,8 @@ public class EnemyHealth : MonoBehaviour {
 		if (other.gameObject.CompareTag("Bullet"))
 		{
 			//spawn explosion of bits
+			//change to hit animation
+			//cause hit stun
 		}
 	}
 }

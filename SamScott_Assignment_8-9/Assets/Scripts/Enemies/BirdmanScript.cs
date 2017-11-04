@@ -1,12 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using System.Security.Cryptography;
 using UnityEngine;
 
-public class PumpkinScript : MonoBehaviour {
+public class BirdmanScript : MonoBehaviour {
 
-	//pumpkin guts explosion
-	
+	//birdman guts explosion
+
 	//enemy state here
 	private EnemyState currentState = EnemyState.Rising;
 
@@ -18,40 +17,45 @@ public class PumpkinScript : MonoBehaviour {
 	private Vector3 risePosition;
 	//destination position (i.e. player)
 	private Vector3 destination;
-	
+
 	//step value
 	private float t = 0f;
 
 	//time is should take to reach rise position
-	private float riseTime = 1f;
+	private float riseTime = 5.0f;
 	//time it should take to reach the player
-	private float journeyTime = 10f;
+	private float journeyTime = 20f;
 
 	//gameplay values
-	private float travelSpeed = 1.0f;
-	
-	private float swaySpeed_X = 2f;
-	private float swayRange_X = 0.25f;
-	
-	private float swaySpeed_Y = 3.0f;
-	private float swayRange_Y = 1.5f;
+	public float travelSpeed = 1.0f;
+
+	private float rotSway_X = 2f;
+
+	public float attackSpeed = 1f;
 
 	public float baseHitStun = 1f;
-	
+
 	// Use this for initialization
 	void Start () {
-		origin = transform.position;
-		risePosition = transform.position + Vector3.up * 2f;
+		//get bounds
+		Bounds birdmanBounds = transform.GetChild(0).GetComponent<MeshFilter>().mesh.bounds;
+		float birdmanHeight = birdmanBounds.size.y * transform.localScale.y;
+		origin = transform.position + Vector3.down * birdmanHeight;
+		risePosition = transform.position + Vector3.up * birdmanHeight;
+
+		transform.position = origin;
 
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
 		switch (currentState) {
 		case EnemyState.Rising:
+			Debug.Log ("Start rising!");
 			RiseFromGrave ();
 			break;
 		case EnemyState.Moving:
+			Debug.Log ("Start moving!");
 			UpdatePosition ();
 			break;
 		case EnemyState.Attacking:
@@ -66,13 +70,14 @@ public class PumpkinScript : MonoBehaviour {
 	private void RiseFromGrave() {
 		t += Time.deltaTime * travelSpeed;
 		if (t >= riseTime) {
+			Debug.Log ("Has risen!!");
 			rising = false;
 			origin = transform.position;
-			destination = GameObject.FindGameObjectWithTag("Player").transform.position + Vector3.forward;
+			destination = GameObject.FindGameObjectWithTag("Player").transform.position + Vector3.forward * 2f;
 			currentState = EnemyState.Moving;
 			t = 0;
 		} else {
-			//move towards player
+			//move towards risen position
 			transform.position = Vector3.Lerp(origin, risePosition, t/riseTime);
 		}
 	}
@@ -80,15 +85,27 @@ public class PumpkinScript : MonoBehaviour {
 	private void UpdatePosition() {
 		t += Time.deltaTime * travelSpeed;
 		if (t >= journeyTime) {
-			//blow the heck up
-			//player damage
-			Destroy(gameObject);
+			//attacking mode
+			currentState = EnemyState.Attacking;
+			t = 0;
 		}
 		else {
 			//move towards player
 			transform.position = Vector3.Lerp(origin, destination, t/journeyTime);
-			//update x and y pos
-			transform.Translate((Vector3.up * Mathf.Sin(t*swaySpeed_Y)) * swayRange_Y + Vector3.right * Mathf.Sin(t*swaySpeed_X) * swayRange_X);
 		}
+	}
+
+	private void UpdateAttack() {
+		//attack the player every ___ seconds
+		t += Time.deltaTime;
+		if (t >= 10f/attackSpeed) {
+			//Attack function!
+			Debug.Log("Sycthe attack!");
+			t -= attackSpeed;
+		}
+	}
+
+	private void DealDamage() {
+		//player, player health script, deal damage
 	}
 }

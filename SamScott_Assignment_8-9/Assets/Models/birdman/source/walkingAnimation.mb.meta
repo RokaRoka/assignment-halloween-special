@@ -1,0 +1,178 @@
+fileFormatVersion: 2
+guid: 49c295b8d650a2c4fa03d05fd1f590a7
+timeCreated: 1509754351
+licenseType: Pro
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: beak1
+    100002: beak_2
+    100004: Birdman
+    100006: head
+    100008: joint13
+    100010: joint5
+    100012: Lankle
+    100014: Lelbow
+    100016: Lhand
+    100018: Lhip
+    100020: Lknee
+    100022: Lscythe
+    100024: Lshoulder
+    100026: Ltoe
+    100028: neck
+    100030: Rankle
+    100032: Relbow
+    100034: Rhand
+    100036: Rhip
+    100038: Rknee
+    100040: root_joint
+    100042: Rscythe
+    100044: Rshoulder
+    100046: Rtoe
+    100048: spine_1
+    100050: spine_2
+    100052: //RootNode
+    400000: beak1
+    400002: beak_2
+    400004: Birdman
+    400006: head
+    400008: joint13
+    400010: joint5
+    400012: Lankle
+    400014: Lelbow
+    400016: Lhand
+    400018: Lhip
+    400020: Lknee
+    400022: Lscythe
+    400024: Lshoulder
+    400026: Ltoe
+    400028: neck
+    400030: Rankle
+    400032: Relbow
+    400034: Rhand
+    400036: Rhip
+    400038: Rknee
+    400040: root_joint
+    400042: Rscythe
+    400044: Rshoulder
+    400046: Rtoe
+    400048: spine_1
+    400050: spine_2
+    400052: //RootNode
+    4300000: Birdman
+    7400000: Take 001
+    9500000: //RootNode
+    13700000: Birdman
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: blinn1
+    second: {fileID: 2100000, guid: 1c284122333cafa4ebee833c7db7f156, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lambert2
+    second: {fileID: 2100000, guid: c59484e9c3e9401498aa0dbb01ecc34b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lambert3
+    second: {fileID: 2100000, guid: 6e93d08f862fca74ba74be9413cd1154, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lambert4
+    second: {fileID: 2100000, guid: 0dc38995b7bb2ce4cb8aade9c183a9d7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lambert5
+    second: {fileID: 2100000, guid: 0e2d787bd96ea9941aed77fcf03bcaf3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lambert6
+    second: {fileID: 2100000, guid: f27d02ba69486594fbc12ddae3842a0a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: phong1
+    second: {fileID: 2100000, guid: 6cd9577b322116245bc643199835706d, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 0
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

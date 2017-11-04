@@ -1,0 +1,207 @@
+//Maya ASCII 2017 scene
+//Name: rising.ma
+//Last modified: Fri, Nov 03, 2017 05:28:57 PM
+//Codeset: 1252
+requires maya "2017";
+requires "stereoCamera" "10.0";
+currentUnit -l centimeter -a degree -t film;
+fileInfo "application" "maya";
+fileInfo "product" "Maya 2017";
+fileInfo "version" "2017";
+fileInfo "cutIdentifier" "201606150345-997974";
+fileInfo "osv" "Microsoft Windows 8 , 64-bit  (Build 9200)\n";
+fileInfo "license" "education";
+createNode clipLibrary -n "clipLibrary1";
+	rename -uid "2A8316F9-495E-1967-1340-E8B1B747954A";
+	setAttr -s 30 ".cel[0].cev";
+	setAttr ".cd[0].cm" -type "characterMapping" 30 "Rhand.translateZ" 1 1 "Rhand.translateY" 
+		1 2 "Rhand.translateX" 1 3 "Rhand.visibility" 0 1 "Rhand.rotateZ" 
+		2 1 "Rhand.rotateY" 2 2 "Rhand.rotateX" 2 3 "Rhand.scaleZ" 
+		0 2 "Rhand.scaleY" 0 3 "Rhand.scaleX" 0 4 "Relbow.translateZ" 
+		1 4 "Relbow.translateY" 1 5 "Relbow.translateX" 1 6 "Relbow.visibility" 
+		0 5 "Relbow.rotateZ" 2 4 "Relbow.rotateY" 2 5 "Relbow.rotateX" 
+		2 6 "Relbow.scaleZ" 0 6 "Relbow.scaleY" 0 7 "Relbow.scaleX" 
+		0 8 "Rshoulder.translateZ" 1 7 "Rshoulder.translateY" 1 
+		8 "Rshoulder.translateX" 1 9 "Rshoulder.visibility" 0 9 "Rshoulder.rotateZ" 
+		2 7 "Rshoulder.rotateY" 2 8 "Rshoulder.rotateX" 2 9 "Rshoulder.scaleZ" 
+		0 10 "Rshoulder.scaleY" 0 11 "Rshoulder.scaleX" 0 12  ;
+	setAttr ".cd[0].cim" -type "Int32Array" 30 0 1 2 3 4
+		 5 6 7 8 9 10 11 12 13 14 15 16
+		 17 18 19 20 21 22 23 24 25 26 27 28
+		 29 ;
+createNode animClip -n "risingSource";
+	rename -uid "DB32FEF2-4432-80C3-93C5-24B9B89FBF77";
+	setAttr ".ihi" 0;
+	setAttr -s 30 ".ac[0:29]" yes yes yes yes yes yes yes yes yes yes yes 
+		yes yes yes yes yes yes yes yes yes yes yes yes yes yes yes yes yes yes yes;
+	setAttr ".ss" 1;
+	setAttr ".se" 2;
+	setAttr ".ci" no;
+createNode animCurveTL -n "Rhand_translateZ";
+	rename -uid "6D2B79AD-4937-5C6F-6A45-41BE18B713B5";
+	setAttr ".tan" 18;
+	setAttr ".ktv[0]"  1 0;
+createNode animCurveTL -n "Rhand_translateY";
+	rename -uid "A8E63B49-46A8-A063-96DC-F9B67DD33DD4";
+	setAttr ".tan" 18;
+	setAttr ".ktv[0]"  1 0.041204001754522324;
+createNode animCurveTL -n "Rhand_translateX";
+	rename -uid "24FCC01E-4C0A-0A87-BA92-CAB3D45169C0";
+	setAttr ".tan" 18;
+	setAttr ".ktv[0]"  1 -6.6402649879455566;
+createNode animCurveTU -n "Rhand_visibility";
+	rename -uid "8CE54D15-4B30-51C7-40A2-368F8C806B85";
+	setAttr ".tan" 9;
+	setAttr ".ktv[0]"  1 1;
+	setAttr ".kot[0]"  5;
+createNode animCurveTA -n "Rhand_rotateZ";
+	rename -uid "750BD253-4666-F4C3-1015-B69D60AA62B1";
+	setAttr ".tan" 18;
+	setAttr ".ktv[0]"  1 -66.749406152181805;
+createNode animCurveTA -n "Rhand_rotateY";
+	rename -uid "0E957CE7-4508-0AAB-86E5-B89D7F173814";
+	setAttr ".tan" 18;
+	setAttr ".ktv[0]"  1 4.2997618317743251;
+createNode animCurveTA -n "Rhand_rotateX";
+	rename -uid "34AD5A6C-44C0-CF13-1F6F-BA8F8702E173";
+	setAttr ".tan" 18;
+	setAttr ".ktv[0]"  1 -49.140211956476662;
+createNode animCurveTU -n "Rhand_scaleZ";
+	rename -uid "008439ED-4A30-2E34-41FF-90A05A946307";
+	setAttr ".tan" 18;
+	setAttr ".ktv[0]"  1 1;
+createNode animCurveTU -n "Rhand_scaleY";
+	rename -uid "911DBAEB-482D-9883-B188-FBB2944D1BDD";
+	setAttr ".tan" 18;
+	setAttr ".ktv[0]"  1 0.9999999859369999;
+createNode animCurveTU -n "Rhand_scaleX";
+	rename -uid "5591FD7D-4E4E-E752-E8ED-2D8126D99329";
+	setAttr ".tan" 18;
+	setAttr ".ktv[0]"  1 0.9999999859369999;
+createNode animCurveTL -n "Relbow_translateZ";
+	rename -uid "4DF3B205-464B-5D54-D544-78A905CF3064";
+	setAttr ".tan" 18;
+	setAttr ".ktv[0]"  1 0;
+createNode animCurveTL -n "Relbow_translateY";
+	rename -uid "B4580A81-47F9-C9A2-819B-B0B467259AA9";
+	setAttr ".tan" 18;
+	setAttr ".ktv[0]"  1 0.0076069999486207962;
+createNode animCurveTL -n "Relbow_translateX";
+	rename -uid "7BEDA4FB-4B60-C472-7DCC-4CB31C7A1301";
+	setAttr ".tan" 18;
+	setAttr ".ktv[0]"  1 -8.4093751907348633;
+createNode animCurveTU -n "Relbow_visibility";
+	rename -uid "56470A66-4B91-D2B3-10B0-5DB631B21727";
+	setAttr ".tan" 9;
+	setAttr ".ktv[0]"  1 1;
+	setAttr ".kot[0]"  5;
+createNode animCurveTA -n "Relbow_rotateZ";
+	rename -uid "24F2957A-43FE-D1F8-676F-0EB7793E254E";
+	setAttr ".tan" 18;
+	setAttr ".ktv[0]"  1 -82.744017895595988;
+createNode animCurveTA -n "Relbow_rotateY";
+	rename -uid "F05713B1-446B-5F8E-B88B-8195EF4F2B82";
+	setAttr ".tan" 18;
+	setAttr ".ktv[0]"  1 -37.024354174021468;
+createNode animCurveTA -n "Relbow_rotateX";
+	rename -uid "9A8FFDF1-4CE8-6A8B-CDF1-6F85CC9F9BEF";
+	setAttr ".tan" 18;
+	setAttr ".ktv[0]"  1 0;
+createNode animCurveTU -n "Relbow_scaleZ";
+	rename -uid "7B3A0241-4BAB-3460-1C81-DCB985B96DE8";
+	setAttr ".tan" 18;
+	setAttr ".ktv[0]"  1 1;
+createNode animCurveTU -n "Relbow_scaleY";
+	rename -uid "BFFE93F1-40DE-1CB1-5120-B3BD1BF3CD88";
+	setAttr ".tan" 18;
+	setAttr ".ktv[0]"  1 1.0000002503324688;
+createNode animCurveTU -n "Relbow_scaleX";
+	rename -uid "AA006F5D-4F0E-6A8C-E223-ED88FC16E78D";
+	setAttr ".tan" 18;
+	setAttr ".ktv[0]"  1 1.0000002503324688;
+createNode animCurveTL -n "Rshoulder_translateZ";
+	rename -uid "41744C34-464B-5702-8E5B-43A193546482";
+	setAttr ".tan" 18;
+	setAttr ".ktv[0]"  1 0;
+createNode animCurveTL -n "Rshoulder_translateY";
+	rename -uid "72453FDA-4783-865E-44BB-7E93ED7B6947";
+	setAttr ".tan" 18;
+	setAttr ".ktv[0]"  1 0.092127002775669098;
+createNode animCurveTL -n "Rshoulder_translateX";
+	rename -uid "B6B8A737-49F9-F96F-9899-61AEA4E3E049";
+	setAttr ".tan" 18;
+	setAttr ".ktv[0]"  1 -3.5091218948364258;
+createNode animCurveTU -n "Rshoulder_visibility";
+	rename -uid "E3ECC61C-4112-9B0B-BF1B-D5920F59C469";
+	setAttr ".tan" 9;
+	setAttr ".ktv[0]"  1 1;
+	setAttr ".kot[0]"  5;
+createNode animCurveTA -n "Rshoulder_rotateZ";
+	rename -uid "7A5E39C3-4C33-BBE1-2D32-E0B250B8939A";
+	setAttr ".tan" 18;
+	setAttr ".ktv[0]"  1 -69.151407301084731;
+createNode animCurveTA -n "Rshoulder_rotateY";
+	rename -uid "6667AC07-4FEF-C983-21F2-BDB1733EA5FB";
+	setAttr ".tan" 18;
+	setAttr ".ktv[0]"  1 -15.412086056725007;
+createNode animCurveTA -n "Rshoulder_rotateX";
+	rename -uid "53CFF48F-4895-EE18-5434-DCB6B651D950";
+	setAttr ".tan" 18;
+	setAttr ".ktv[0]"  1 -8.7102075228169493;
+createNode animCurveTU -n "Rshoulder_scaleZ";
+	rename -uid "A18F5A11-48CC-6A96-DDD2-978B88B80C4F";
+	setAttr ".tan" 18;
+	setAttr ".ktv[0]"  1 1;
+createNode animCurveTU -n "Rshoulder_scaleY";
+	rename -uid "6FBAC296-4EFA-A36C-6FB9-A8B4098FAD7E";
+	setAttr ".tan" 18;
+	setAttr ".ktv[0]"  1 1.0000003290959458;
+createNode animCurveTU -n "Rshoulder_scaleX";
+	rename -uid "DEEE7828-4270-614B-723C-48A870B64C13";
+	setAttr ".tan" 18;
+	setAttr ".ktv[0]"  1 1.0000003290959458;
+select -ne :time1;
+	setAttr ".o" 0;
+select -ne :renderPartition;
+	setAttr -s 9 ".st";
+select -ne :renderGlobalsList1;
+select -ne :defaultShaderList1;
+	setAttr -s 11 ".s";
+select -ne :postProcessList1;
+	setAttr -s 2 ".p";
+select -ne :defaultRenderingList1;
+select -ne :characterPartition;
+select -ne :ikSystem;
+	setAttr -s 4 ".sol";
+connectAttr "risingSource.cl" "clipLibrary1.sc[0]";
+connectAttr "Rhand_translateZ.a" "clipLibrary1.cel[0].cev[0].cevr";
+connectAttr "Rhand_translateY.a" "clipLibrary1.cel[0].cev[1].cevr";
+connectAttr "Rhand_translateX.a" "clipLibrary1.cel[0].cev[2].cevr";
+connectAttr "Rhand_visibility.a" "clipLibrary1.cel[0].cev[3].cevr";
+connectAttr "Rhand_rotateZ.a" "clipLibrary1.cel[0].cev[4].cevr";
+connectAttr "Rhand_rotateY.a" "clipLibrary1.cel[0].cev[5].cevr";
+connectAttr "Rhand_rotateX.a" "clipLibrary1.cel[0].cev[6].cevr";
+connectAttr "Rhand_scaleZ.a" "clipLibrary1.cel[0].cev[7].cevr";
+connectAttr "Rhand_scaleY.a" "clipLibrary1.cel[0].cev[8].cevr";
+connectAttr "Rhand_scaleX.a" "clipLibrary1.cel[0].cev[9].cevr";
+connectAttr "Relbow_translateZ.a" "clipLibrary1.cel[0].cev[10].cevr";
+connectAttr "Relbow_translateY.a" "clipLibrary1.cel[0].cev[11].cevr";
+connectAttr "Relbow_translateX.a" "clipLibrary1.cel[0].cev[12].cevr";
+connectAttr "Relbow_visibility.a" "clipLibrary1.cel[0].cev[13].cevr";
+connectAttr "Relbow_rotateZ.a" "clipLibrary1.cel[0].cev[14].cevr";
+connectAttr "Relbow_rotateY.a" "clipLibrary1.cel[0].cev[15].cevr";
+connectAttr "Relbow_rotateX.a" "clipLibrary1.cel[0].cev[16].cevr";
+connectAttr "Relbow_scaleZ.a" "clipLibrary1.cel[0].cev[17].cevr";
+connectAttr "Relbow_scaleY.a" "clipLibrary1.cel[0].cev[18].cevr";
+connectAttr "Relbow_scaleX.a" "clipLibrary1.cel[0].cev[19].cevr";
+connectAttr "Rshoulder_translateZ.a" "clipLibrary1.cel[0].cev[20].cevr";
+connectAttr "Rshoulder_translateY.a" "clipLibrary1.cel[0].cev[21].cevr";
+connectAttr "Rshoulder_translateX.a" "clipLibrary1.cel[0].cev[22].cevr";
+connectAttr "Rshoulder_visibility.a" "clipLibrary1.cel[0].cev[23].cevr";
+connectAttr "Rshoulder_rotateZ.a" "clipLibrary1.cel[0].cev[24].cevr";
+connectAttr "Rshoulder_rotateY.a" "clipLibrary1.cel[0].cev[25].cevr";
+connectAttr "Rshoulder_rotateX.a" "clipLibrary1.cel[0].cev[26].cevr";
+connectAttr "Rshoulder_scaleZ.a" "clipLibrary1.cel[0].cev[27].cevr";
+connectAttr "Rshoulder_scaleY.a" "clipLibrary1.cel[0].cev[28].cevr";
+connectAttr "Rshoulder_scaleX.a" "clipLibrary1.cel[0].cev[29].cevr";
+// End of rising.ma
